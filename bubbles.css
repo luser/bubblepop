@@ -1,0 +1,59 @@
+/*
+ *  Any copyright is dedicated to the Public Domain.
+ *  http://creativecommons.org/publicdomain/zero/1.0/
+ */
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    background: #d7d7d7;
+    overflow: hidden;
+}
+
+.bubble {
+   width:200px; /* Our bubble will be 200px wide and 200px tall */
+   height:200px;
+   box-shadow:inset 30px 30px 75px rgba(0,0,0,.1), /* this gives us our subtle light gray background gradient */
+              inset 0px 0px 15px rgba(0,0,0,.5), /* this gives us the darker gray border around the whole bubble */
+              inset 0px 0px 55px rgba(255,255,255,.5), /* this gives us the more subtle white gradient all around the edge of the bubble */
+              inset 3px 3px 5px rgba(0,0,0,.5), /* this gives us the slightly darker top left edge */
+              0 0 50px rgba(255,255,255,.75); /* this puts a white glow all around the outside of the bubble to better contrast the edge */
+   border-radius:100px; /* making our border-radius half the width/height ensures a perfectly round circle */
+   background:rgba(255,255,255,.4); /* makes our bubble slightly lighter in color than the background */
+   position:absolute;
+   animation-name: bubbleup;
+   animation-timing-function: linear;
+}
+
+.bubble:before { /* adds the white highlight on the top left of the bubble */
+   content:"";
+   display:block;
+   position:absolute;
+   width:100px;
+   height:100px;
+   top:15px;
+   left:15px;
+   border-radius: 150px 50px;
+   box-shadow:inset 10px 10px 50px rgba(255,255,255,.6);
+}
+
+.bubble:after { /* adds the darker lowlight on the bottom of the bubble */
+   content:"";
+   display:block;
+   position:absolute;
+   width:170px;
+   height:170px;
+   border-radius:170px;
+   left:15px;
+   top:15px;
+   box-shadow:inset 0px -10px 10px rgba(0,0,0,.05);
+}
+
+@keyframes bubbleup {
+    from {
+        top: 100%;
+    }
+    to {
+        top: -50%;
+    }
+}
