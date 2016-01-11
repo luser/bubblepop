@@ -7,17 +7,29 @@ var bubbles = 0;
 var MAX_BUBBLES = 50;
 var interval = -1;
 
+var bubble_cache = [];
+
 function randInt(low, high) {
   return Math.round(Math.random() * (high - low)) + low;
 }
 
 function removeBubble(b) {
-  document.body.removeChild(b);
-  bubbles--;
+  if (!b.removed) {
+    b.removed = true;
+    document.body.removeChild(b);
+    bubble_cache.push(b);
+    bubbles--;
+  }
 }
 
 function spawnBubble() {
-  var b = document.createElement('div');
+  var b;
+  if (bubble_cache.length > 0) {
+    b = bubble_cache.pop();
+    b.removed = false;
+  } else {
+    b = document.createElement('div');
+  }
   b.className = 'bubble';
   b.style.left = (Math.random() * (window.innerWidth - 100) - 100) + 'px';
   b.style.animationDuration = (Math.random() * 4 + 2) + 's';
